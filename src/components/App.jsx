@@ -2,7 +2,7 @@ import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
 import Footer from '../components/Footer/Footer'
 import PopupWithForm from '../components/PopupWithForm/PopupWithForm'
-import PopupImage from '../components/PopupImage/PopupImage'
+import ImagePopup from '../components/ImagePopup/ImagePopup'
 import { useState } from 'react'
 
 function App() {
@@ -125,7 +125,7 @@ function handleCardClick(card) {
 
     <PopupWithForm name='delete' title='Вы уверены?'  titleButton="Да" />
 
-    <PopupImage card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups}/>
+    <ImagePopup card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups}/>
 
     </div>
 
