@@ -6,7 +6,11 @@ class Api {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject;
+    return res.ok
+      ? res.json()
+      : Promise.reject((error) =>
+          console.error(`Ошибка ответа сервера ${error}`)
+        );
   }
 
   getInfo() {
