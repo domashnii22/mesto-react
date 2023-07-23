@@ -1,7 +1,10 @@
 export default function ImagePopup({ card, isOpen, onClose }) {
   return (
-    <div className={`popup popup_type_image ${isOpen && "popup_opened"}`}>
-      <div className="popup__block">
+    <div
+      className={`popup popup_type_image ${isOpen ? "popup_opened" : ""}`}
+      onClick={onClose}
+    >
+      <div className="popup__block" onClick={(evt) => evt.stopPropagation()}>
         <button
           aria-label="Кнопка закрытия попапа"
           type="button"

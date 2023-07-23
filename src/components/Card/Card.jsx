@@ -1,11 +1,19 @@
-export default function Card({ card, onCardClick }) {
+import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import ButtonLike from "../ButtonLike/ButtonLike";
+
+export default function Card({ card, onCardClick, onDelete }) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <article className="place">
-      <button
-        aria-label="Кнопка удаления карточки"
-        type="button"
-        className="place__trash-button"
-      />
+      {currentUser._id === card.owner._id && (
+        <button
+          aria-label="Кнопка удаления карточки"
+          type="button"
+          className="place__trash-button"
+          onClick={() => onDelete(card._id)}
+        />
+      )}
       <img
         className="place__image"
         src={card.link}
@@ -15,12 +23,11 @@ export default function Card({ card, onCardClick }) {
       <div className="place__caption-block">
         <h2 className="place__caption">{card.name}</h2>
         <div className="place__heart-block">
-          <button
-            aria-label="Кнопка для лайка"
-            type="button"
-            className="place__heart"
+          <ButtonLike
+            likes={card.likes}
+            myid={currentUser._id}
+            cardid={card._id}
           />
-          <span className="place__heart-counter" />
         </div>
       </div>
     </article>
