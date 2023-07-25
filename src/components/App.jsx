@@ -137,6 +137,18 @@ function App() {
       .catch((err) => console.err(`Ошибка при добавлении карточки ${err}`));
   }
 
+  //
+  function handleCardLike(card, isLiked) {
+    (!isLiked ? api.addLike(card._id) : api.deleteLike(card._id))
+      .then((newCard) =>
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        )
+      )
+      .catch((error) => console.log(`Ошибка: ${error}`));
+  }
+  //
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -149,6 +161,9 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
             onDelete={handleDeletePopupOpen}
+            //
+            onCardLike={handleCardLike}
+            //
             cards={cards}
           />
 

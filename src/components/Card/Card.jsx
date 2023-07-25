@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import ButtonLike from "../ButtonLike/ButtonLike";
+// import ButtonLike from "../ButtonLike/ButtonLike";
 
-export default function Card({ card, onCardClick, onDelete }) {
+export default function Card({ card, onCardClick, onDelete, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  // function handleLikeClick() {
+  //   onCardLike(card, isLiked);
+  // }
+
   return (
     <article className="place">
       {currentUser._id === card.owner._id && (
@@ -23,11 +28,13 @@ export default function Card({ card, onCardClick, onDelete }) {
       <div className="place__caption-block">
         <h2 className="place__caption">{card.name}</h2>
         <div className="place__heart-block">
-          <ButtonLike
-            likes={card.likes}
-            myid={currentUser._id}
-            cardid={card._id}
+          <button
+            aria-label="Кнопка для лайка"
+            type="button"
+            className={`place__heart ${isLiked ? "place__heart_active" : ""}`}
+            onClick={() => onCardLike(card, isLiked)}
           />
+          <span className="place__heart-counter">{card.likes.length}</span>
         </div>
       </div>
     </article>

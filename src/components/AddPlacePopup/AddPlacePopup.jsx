@@ -26,7 +26,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       isValid={isValid}
     >
       <input
-        required=""
+        required
         name="title"
         placeholder="Название"
         type="text"
